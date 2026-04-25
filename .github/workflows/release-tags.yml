@@ -7,7 +7,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: vlindersoftware/validate-coverage
+  IMAGE_NAME: vln-devsecops/actions-validate-coverage
 
 permissions:
   contents: write
@@ -85,7 +85,7 @@ jobs:
             
             ```yaml
             - name: Validate Coverage
-              uses: vlindersoftware/validate-coverage@${{ github.ref_name }}
+              uses: vln-devsecops/actions-validate-coverage@${{ github.ref_name }}
               with:
                 coverage-file: coverage/clover.xml
                 minimum-coverage: 80

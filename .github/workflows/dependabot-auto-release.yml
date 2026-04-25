@@ -98,7 +98,7 @@ jobs:
           fi
           
           # Update action.yml to reference the specific version
-          sed -i "s|docker://ghcr.io/vlindersoftware/validate-coverage:[^'\"]*|docker://ghcr.io/vlindersoftware/validate-coverage:${{ steps.version.outputs.next }}|g" action.yml
+          sed -i "s|docker://ghcr.io/vln-devsecops/actions-validate-coverage:[^'\"]*|docker://ghcr.io/vln-devsecops/actions-validate-coverage:${{ steps.version.outputs.next }}|g" action.yml
           
           git add action.yml
           git commit -m "chore: Update action.yml to reference ${{ steps.version.outputs.next }} [automated]"
@@ -134,7 +134,7 @@ jobs:
           
           # Switch back to main and ensure action.yml uses latest
           git checkout main
-          sed -i "s|docker://ghcr.io/vlindersoftware/validate-coverage:[^'\"]*|docker://ghcr.io/vlindersoftware/validate-coverage:latest|g" action.yml
+          sed -i "s|docker://ghcr.io/vln-devsecops/actions-validate-coverage:[^'\"]*|docker://ghcr.io/vln-devsecops/actions-validate-coverage:latest|g" action.yml
           
           if ! git diff-index --quiet HEAD; then
             git add action.yml

@@ -97,13 +97,13 @@ The system creates multiple tags for each release to provide flexibility:
 **Usage examples:**
 ```yaml
 # Pin to exact version (recommended for production)
-uses: vlindersoftware/validate-coverage@v1.0.4
+uses: vln-devsecops/actions-validate-coverage@v1.0.4
 
 # Use latest patch in minor series (gets auto-updates)
-uses: vlindersoftware/validate-coverage@v1.0
+uses: vln-devsecops/actions-validate-coverage@v1.0
 
 # Use latest in major series (gets all updates)
-uses: vlindersoftware/validate-coverage@v1
+uses: vln-devsecops/actions-validate-coverage@v1
 ```
 
 ## Manual Override

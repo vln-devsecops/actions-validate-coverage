@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: vlindersoftware/validate-coverage
+  IMAGE_NAME: vln-devsecops/actions-validate-coverage
 
 jobs:
   build:
@@ -107,7 +107,7 @@ jobs:
             ### Usage
             ```yaml
             - name: Validate Coverage
-              uses: vlindersoftware/validate-coverage@${{ steps.version.outputs.version }}
+              uses: vln-devsecops/actions-validate-coverage@${{ steps.version.outputs.version }}
               with:
                 coverage-file: 'coverage/cobertura.xml'
                 minimum-coverage: '85'

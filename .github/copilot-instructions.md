@@ -13,7 +13,7 @@ This is a Docker-based GitHub Action for validating test coverage from XML files
 
 ## Architecture
 - **Runtime**: Alpine Linux container with xmllint, bc, bash
-- **Registry**: GitHub Container Registry (ghcr.io/vlindersoftware/validate-coverage)
+- **Registry**: GitHub Container Registry (ghcr.io/vln-devsecops/actions-validate-coverage)
 - **Versioning**: Semantic versioning with floating major/minor tags
 - **CI/CD**: Automated build, test, and release pipeline
 

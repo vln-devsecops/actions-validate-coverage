@@ -233,7 +233,7 @@ main() {
     
     # Update action.yml to reference the specific version
     log "Updating action.yml to reference version $VERSION"
-    sed -i "s|docker://ghcr.io/vlindersoftware/validate-coverage:[^'\"]*|docker://ghcr.io/vlindersoftware/validate-coverage:$VERSION|g" action.yml
+    sed -i "s|docker://ghcr.io/vln-devsecops/actions-validate-coverage:[^'\"]*|docker://ghcr.io/vln-devsecops/actions-validate-coverage:$VERSION|g" action.yml
     
     git add action.yml
     git commit -m "chore: Update action.yml to reference $VERSION"
@@ -271,7 +271,7 @@ main() {
     git checkout main
     
     log "Ensuring action.yml on main uses 'latest'"
-    sed -i "s|docker://ghcr.io/vlindersoftware/validate-coverage:[^'\"]*|docker://ghcr.io/vlindersoftware/validate-coverage:latest|g" action.yml
+    sed -i "s|docker://ghcr.io/vln-devsecops/actions-validate-coverage:[^'\"]*|docker://ghcr.io/vln-devsecops/actions-validate-coverage:latest|g" action.yml
     
     if ! git diff-index --quiet HEAD; then
         git add action.yml
@@ -293,12 +293,12 @@ main() {
     success "   • GitHub release with notes"
     echo ""
     success "🔍 Monitor progress at:"
-    success "   https://github.com/vlindersoftware/validate-coverage/actions"
+    success "   https://github.com/vln-devsecops/actions-validate-coverage/actions"
     echo ""
     success "📋 Once complete, the action can be used as:"
-    success "   uses: vlindersoftware/validate-coverage@v$VERSION"
-    success "   uses: vlindersoftware/validate-coverage@v$MAJOR.$MINOR"  
-    success "   uses: vlindersoftware/validate-coverage@v$MAJOR"
+    success "   uses: vln-devsecops/actions-validate-coverage@v$VERSION"
+    success "   uses: vln-devsecops/actions-validate-coverage@v$MAJOR.$MINOR"  
+    success "   uses: vln-devsecops/actions-validate-coverage@v$MAJOR"
     echo ""
 }
 

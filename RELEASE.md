@@ -109,9 +109,9 @@ Proceed with release v1.2.3? (y/N): y
 ## Validation
 
 After each release:
-1. Monitor GitHub Actions: https://github.com/VlinderSoftware/validate-coverage/actions
-2. Verify Docker images: https://github.com/VlinderSoftware/validate-coverage/pkgs/container/validate-coverage
-3. Test the action: `docker pull ghcr.io/vlindersoftware/validate-coverage:1.2.3`
+1. Monitor GitHub Actions: https://github.com/vln-devsecops/actions-validate-coverage/actions
+2. Verify Docker images: https://github.com/vln-devsecops/actions-validate-coverage/pkgs/container/actions-validate-coverage
+3. Test the action: `docker pull ghcr.io/vln-devsecops/actions-validate-coverage:1.2.3`
 
 ## Future Automation
 
