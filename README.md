@@ -216,6 +216,9 @@ jobs:
 ### Local Testing
 
 ```bash
+# Run the unit test suite
+bats tests/validate-coverage.bats
+
 # Test the script directly
 ./validate-coverage.sh examples/clover.xml 80
 

@@ -18,11 +18,14 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y libxml2-utils bc
+          sudo apt-get install -y libxml2-utils bc bats
         
       - name: Make script executable
         run: chmod +x validate-coverage.sh
-        
+
+      - name: Run unit tests
+        run: bats tests/validate-coverage.bats
+         
       - name: Test Clover format
         run: ./validate-coverage.sh examples/clover.xml 80 clover
         
