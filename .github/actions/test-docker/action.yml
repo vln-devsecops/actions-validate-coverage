@@ -1,0 +1,39 @@
+name: Test Docker image
+description: >
+  Run the validate-coverage test suite against a pre-built Docker image.
+  The caller must have already checked out the repository so that the
+  examples/ directory is present in the workspace.
+
+inputs:
+  image:
+    description: >
+      Fully-qualified Docker image reference to test
+      (e.g. ghcr.io/vln-devsecops/actions-validate-coverage:main).
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Test Docker image with Clover
+      shell: bash
+      run: |
+        docker run --rm \
+          -v "${{ github.workspace }}/examples:/workspace" \
+          "${{ inputs.image }}" \
+          /workspace/clover.xml 80 clover
+
+    - name: Test Docker image with Cobertura
+      shell: bash
+      run: |
+        docker run --rm \
+          -v "${{ github.workspace }}/examples:/workspace" \
+          "${{ inputs.image }}" \
+          /workspace/cobertura.xml 80 cobertura
+
+    - name: Test Docker image with JaCoCo
+      shell: bash
+      run: |
+        docker run --rm \
+          -v "${{ github.workspace }}/examples:/workspace" \
+          "${{ inputs.image }}" \
+          /workspace/jacoco.xml 80 jacoco

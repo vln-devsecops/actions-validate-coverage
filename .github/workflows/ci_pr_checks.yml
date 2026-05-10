@@ -10,8 +10,15 @@ permissions:
   checks: write
 
 jobs:
-  test:
-    name: Test and Validate
-    uses: ./.github/workflows/test.yml
+  lint:
+    name: Lint
+    uses: ./.github/workflows/_lint.yml
+    permissions:
+      contents: read
+
+  test_bash:
+    needs: lint
+    name: Test the script
+    uses: ./.github/workflows/_test_bash.yml
     permissions:
       contents: read
