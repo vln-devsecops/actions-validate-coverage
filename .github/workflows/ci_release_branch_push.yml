@@ -11,12 +11,12 @@ permissions:
 jobs:
   test:
     name: Test and Validate
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/_test.yml
     permissions:
       contents: read
       
   validate-action:
     name: Validate Action Configuration
-    uses: ./.github/workflows/validate-action.yml
+    uses: ./.github/workflows/_validate-action.yml
     permissions:
       contents: read

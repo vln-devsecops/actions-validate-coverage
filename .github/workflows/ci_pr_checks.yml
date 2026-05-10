@@ -15,13 +15,3 @@ jobs:
     uses: ./.github/workflows/test.yml
     permissions:
       contents: read
-
-  auto-merge:
-    name: Auto-merge Dependabot
-    if: github.actor == 'dependabot[bot]'
-    needs: test
-    uses: ./.github/workflows/auto-merge.yml
-    permissions:
-      contents: write
-      pull-requests: write
-    secrets: inherit
