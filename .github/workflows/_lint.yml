@@ -1,0 +1,25 @@
+name: Lint the script and action yaml
+
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint and Validate
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        
+      - name: Lint shell script
+        run: |
+          sudo apt-get update
+          sudo apt-get install shellcheck
+          shellcheck validate-coverage.sh
+          
+      - name: Validate action.yml
+        run: |
+          # Basic YAML validation
+          python3 -c "import yaml; yaml.safe_load(open('action.yml'))"
+          echo "action.yml is valid YAML"

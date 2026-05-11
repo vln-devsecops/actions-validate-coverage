@@ -34,7 +34,7 @@ This action follows semantic versioning with convenience tags:
 
 ```yaml
 - name: Validate Coverage
-  uses: vlindersoftware/validate-coverage@v1
+  uses: vln-devsecops/actions-validate-coverage@v1
   with:
     coverage-file: 'coverage/clover.xml'
     minimum-coverage: '80'
@@ -44,7 +44,7 @@ This action follows semantic versioning with convenience tags:
 
 ```yaml
 - name: Validate Coverage
-  uses: vlindersoftware/validate-coverage@v1
+  uses: vln-devsecops/actions-validate-coverage@v1
   with:
     coverage-file: 'coverage/coverage.xml'
     minimum-coverage: '85'
@@ -57,7 +57,7 @@ This action follows semantic versioning with convenience tags:
 ```yaml
 - name: Validate Coverage
   id: coverage
-  uses: vlindersoftware/validate-coverage@v1
+  uses: vln-devsecops/actions-validate-coverage@v1
   with:
     coverage-file: 'coverage/clover.xml'
     minimum-coverage: '80'
@@ -117,7 +117,7 @@ jobs:
         run: npm run test:coverage
         
       - name: Validate Coverage
-        uses: vlindersoftware/validate-coverage@v1
+        uses: vln-devsecops/actions-validate-coverage@v1
         with:
           coverage-file: 'coverage/clover.xml'
           minimum-coverage: '80'
@@ -148,7 +148,7 @@ jobs:
         run: pytest --cov=src --cov-report=xml
         
       - name: Validate Coverage
-        uses: vlindersoftware/validate-coverage@v1
+        uses: vln-devsecops/actions-validate-coverage@v1
         with:
           coverage-file: 'coverage.xml'
           minimum-coverage: '85'
@@ -177,7 +177,7 @@ jobs:
         run: ./mvnw test jacoco:report
         
       - name: Validate Coverage
-        uses: vlindersoftware/validate-coverage@v1
+        uses: vln-devsecops/actions-validate-coverage@v1
         with:
           coverage-file: 'target/site/jacoco/jacoco.xml'
           minimum-coverage: '75'
@@ -205,7 +205,7 @@ jobs:
 **After:**
 ```yaml
 - name: Validate coverage
-  uses: vlindersoftware/validate-coverage@v1
+  uses: vln-devsecops/actions-validate-coverage@v1
   with:
     coverage-file: 'coverage/clover.xml'
     minimum-coverage: '80'
@@ -216,6 +216,9 @@ jobs:
 ### Local Testing
 
 ```bash
+# Run the unit test suite
+bats tests/validate-coverage.bats
+
 # Test the script directly
 ./validate-coverage.sh examples/clover.xml 80
 
@@ -240,7 +243,7 @@ docker run --rm -v $(pwd)/examples:/workspace validate-coverage \
 ./scripts/create-release.sh 1.0.0
 ```
 
-**Important**: The release script automatically updates action.yml to reference the specific version Docker image (e.g., `ghcr.io/vlindersoftware/validate-coverage:v1.0.0`), ensuring reproducible releases.
+**Important**: The release script automatically updates action.yml to reference the specific version Docker image (e.g., `ghcr.io/vln-devsecops/actions-validate-coverage:v1.0.0`), ensuring reproducible releases.
 
 ### VS Code Tasks
 

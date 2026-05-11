@@ -47,7 +47,7 @@ git push origin main:release/v1
 
 #### The automation will:
 - Determine this should be version `1.2.3` (if `1.2.2` was the latest)
-- Update `action.yml` to use `docker://ghcr.io/vlindersoftware/validate-coverage:1.2.3`
+- Update `action.yml` to use `docker://ghcr.io/vln-devsecops/actions-validate-coverage:1.2.3`
 - Create tags: `v1.2.3`, `v1.2`, `v1`
 - Build and publish Docker image
 - Create GitHub release
@@ -56,13 +56,13 @@ git push origin main:release/v1
 
 ```yaml
 # Use specific version (recommended for production)
-- uses: vlindersoftware/validate-coverage@v1.2.3
+- uses: vln-devsecops/actions-validate-coverage@v1.2.3
 
 # Use minor version (gets patch updates)
-- uses: vlindersoftware/validate-coverage@v1.2
+- uses: vln-devsecops/actions-validate-coverage@v1.2
 
 # Use major version (gets all updates for v1.x.x)
-- uses: vlindersoftware/validate-coverage@v1
+- uses: vln-devsecops/actions-validate-coverage@v1
 ```
 
 ### 4. Workflow Files

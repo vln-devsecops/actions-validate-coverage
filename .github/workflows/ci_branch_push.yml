@@ -1,0 +1,89 @@
+name: Branch Push
+
+on:
+  push:
+    branches: ['**']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: vln-devsecops/actions-validate-coverage
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  lint:
+    name: Lint
+    uses: ./.github/workflows/_lint.yml
+    permissions:
+      contents: read
+
+  test_bash:
+    name: Test the script
+    needs: lint
+    uses: ./.github/workflows/_test_bash.yml
+    permissions:
+      contents: read
+
+  build-test-push:
+    name: Build, test and push image
+    needs: test_bash
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v4
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Build to the local daemon first so we can test without pushing.
+      # docker/metadata-action sanitizes the branch name (/ → -) automatically.
+      - name: Build image for testing
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # Test the locally loaded image. If this fails the push step is skipped.
+      - name: Test image
+        uses: ./.github/actions/test-docker
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.meta.outputs.version }}
+
+      # Push using the GHA cache — all layers are already cached so this is fast.
+      - name: Push image
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

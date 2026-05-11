@@ -47,6 +47,31 @@ show_usage() {
     echo "  $0 coverage/jacoco.xml 90 jacoco /path/to/project"
 }
 
+detect_coverage_type() {
+    local coverage_file="$1"
+
+    if ! command -v xmllint &> /dev/null; then
+        return 1
+    fi
+
+    if [ "$(xmllint --xpath "boolean(/coverage/project/metrics)" "$coverage_file" 2>/dev/null)" = "true" ]; then
+        echo "clover"
+        return 0
+    fi
+
+    if [ "$(xmllint --xpath "boolean(/coverage[@line-rate])" "$coverage_file" 2>/dev/null)" = "true" ]; then
+        echo "cobertura"
+        return 0
+    fi
+
+    if [ "$(xmllint --xpath "boolean(/report/counter[@type='INSTRUCTION'])" "$coverage_file" 2>/dev/null)" = "true" ]; then
+        echo "jacoco"
+        return 0
+    fi
+
+    return 1
+}
+
 # Validate required parameters
 if [ -z "$COVERAGE_FILE" ]; then
     error "Coverage file path is required"
@@ -87,15 +112,10 @@ log "Required minimum coverage: ${MINIMUM_COVERAGE}%"
 
 # Auto-detect coverage type if not specified
 if [ "$COVERAGE_TYPE" = "clover" ]; then
-    # Check if it's actually a clover file
-    if ! grep -q "clover" "$COVERAGE_FILE" 2>/dev/null; then
-        if grep -q "cobertura" "$COVERAGE_FILE" 2>/dev/null; then
-            COVERAGE_TYPE="cobertura"
-            warning "Auto-detected coverage type as 'cobertura'"
-        elif grep -q "jacoco" "$COVERAGE_FILE" 2>/dev/null; then
-            COVERAGE_TYPE="jacoco"
-            warning "Auto-detected coverage type as 'jacoco'"
-        fi
+    DETECTED_COVERAGE_TYPE="$(detect_coverage_type "$COVERAGE_FILE" || true)"
+    if [ -n "$DETECTED_COVERAGE_TYPE" ] && [ "$DETECTED_COVERAGE_TYPE" != "$COVERAGE_TYPE" ]; then
+        COVERAGE_TYPE="$DETECTED_COVERAGE_TYPE"
+        warning "Auto-detected coverage type as '$COVERAGE_TYPE'"
     fi
 fi
 

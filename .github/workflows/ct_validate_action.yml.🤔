@@ -75,7 +75,7 @@ jobs:
             echo "3. The release workflow failed to complete"
             echo ""
             echo "Available recent images can be checked at:"
-            echo "https://github.com/VlinderSoftware/validate-coverage/pkgs/container/validate-coverage"
+            echo "https://github.com/vln-devsecops/actions-validate-coverage/pkgs/container/actions-validate-coverage"
             exit 1
           fi
           

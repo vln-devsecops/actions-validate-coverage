@@ -59,5 +59,5 @@ success "All Docker tests passed!"
 success "Image is ready for publishing"
 
 log "To push to GHCR:"
-log "  docker tag $IMAGE_NAME ghcr.io/vlindersoftware/validate-coverage:latest"
-log "  docker push ghcr.io/vlindersoftware/validate-coverage:latest"
+log "  docker tag $IMAGE_NAME ghcr.io/vln-devsecops/actions-validate-coverage:latest"
+log "  docker push ghcr.io/vln-devsecops/actions-validate-coverage:latest"

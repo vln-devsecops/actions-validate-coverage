@@ -1,0 +1,24 @@
+name: PR Checks
+
+on:
+  pull_request:
+    branches: [ main, 'release/v*' ]
+
+permissions:
+  contents: read
+  packages: read
+  checks: write
+
+jobs:
+  lint:
+    name: Lint
+    uses: ./.github/workflows/_lint.yml
+    permissions:
+      contents: read
+
+  test_bash:
+    needs: lint
+    name: Test the script
+    uses: ./.github/workflows/_test_bash.yml
+    permissions:
+      contents: read

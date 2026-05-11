@@ -44,7 +44,7 @@ show_usage() {
 VERSION="${1:-latest}"
 IMAGE_NAME="validate-coverage"
 REGISTRY="ghcr.io"
-REPO="vlindersoftware/validate-coverage"
+REPO="vln-devsecops/actions-validate-coverage"
 FULL_IMAGE="$REGISTRY/$REPO"
 
 log "Manual Docker image publication"
@@ -109,7 +109,7 @@ success "  - $FULL_IMAGE:latest"
 
 log ""
 log "To use in GitHub Actions:"
-log "  uses: vlindersoftware/validate-coverage@main"
+log "  uses: vln-devsecops/actions-validate-coverage@main"
 log ""
 log "Or update action.yml to reference the published image:"
 log "  image: '$FULL_IMAGE:$VERSION'"

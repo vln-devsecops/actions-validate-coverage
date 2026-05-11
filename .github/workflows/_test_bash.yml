@@ -1,0 +1,43 @@
+name: Test the script
+
+on:
+  workflow_call:
+
+jobs:
+  test-script:
+    runs-on: ubuntu-latest
+    name: Test Script Directly
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxml2-utils bc bats
+        
+      - name: Make script executable
+        run: chmod +x validate-coverage.sh
+
+      - name: Run unit tests
+        run: bats tests/validate-coverage.bats
+         
+      - name: Test Clover format
+        run: ./validate-coverage.sh examples/clover.xml 80 clover
+        
+      - name: Test Cobertura format  
+        run: ./validate-coverage.sh examples/cobertura.xml 80 cobertura
+        
+      - name: Test JaCoCo format
+        run: ./validate-coverage.sh examples/jacoco.xml 80 jacoco
+        
+      - name: Test failure case
+        run: |
+          if ./validate-coverage.sh examples/clover.xml 90 clover; then
+            echo "Expected failure but got success"
+            exit 1
+          else
+            echo "Correctly failed with insufficient coverage"
+          fi
+
