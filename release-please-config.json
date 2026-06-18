@@ -1,0 +1,15 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "simple",
+      "componentid": "actions-validate-coverage",
+      "changelog-type": "github",
+      "bump-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false,
+      "groups": [
+        { "kind": "actions" }
+      ]
+    }
+  }
+}
