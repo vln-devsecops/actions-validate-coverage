@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.4.2](https://github.com/vln-devsecops/actions-validate-coverage/compare/v1.4.1...v1.4.2) (2026-08-05)
+
+
+### Bug Fixes
+
+* resync automerge workflow with canonical template (guidance[#15](https://github.com/vln-devsecops/actions-validate-coverage/issues/15)) ([db1453b](https://github.com/vln-devsecops/actions-validate-coverage/commit/db1453bf1df48197f9e491a8036254b40b6eebfe)), closes [#23](https://github.com/vln-devsecops/actions-validate-coverage/issues/23)
+
 ## [1.4.1](https://github.com/vln-devsecops/actions-validate-coverage/compare/v1.4.0...v1.4.1) (2026-08-04)
 
 
